@@ -167,7 +167,7 @@ input {
 <section class="fade-in">
   <h2 id="typing"></h2>
   <h3 id="counter"></h3>
-  <p>Since 2020 March 💖</p>
+  <p><p>Since 13 March 2020 💖</p>
 </section>
 
 <section class="fade-in">
@@ -273,17 +273,30 @@ function startTyping(){
 
 function startCounter(){
   const startDate = new Date("2020-03-13T00:00:00");
+
   setInterval(()=>{
     const now = new Date();
-    const diff = now - startDate;
 
-    const days = Math.floor(diff / (1000*60*60*24));
-    const years = Math.floor(days / 365);
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+
+    if(days < 0){
+      months--;
+      days += 30;
+    }
+
+    if(months < 0){
+      years--;
+      months += 12;
+    }
 
     document.getElementById("counter").innerHTML =
-    `${years} Years ${days} Days Together 💕`;
+    `${years} Years ${months} Months ${days} Days Together 💕`;
+
   },1000);
 }
+  
 
 function reveal(){
   document.getElementById("final").innerHTML =
